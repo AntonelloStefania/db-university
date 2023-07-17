@@ -42,5 +42,11 @@ QUERY 7
 SELECT COUNT(`name`) as 'num_department' FROM `departments`;
 ```
 -----------------------------------------------------------------------------
+QUERY 8
+
+```
+SELECT * FROM `teachers` WHERE `phone`IS NULL;
+```
+-----------------------------------------------------------------------------
 
 
