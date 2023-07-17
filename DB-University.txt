@@ -5,3 +5,11 @@ SELECT * FROM `students` where `date_of_birth` like '1990%';
 
 ```
 
+QUERY 2
+
+```
+SELECT * FROM `courses` where `cfu` > 10;
+
+```
+
+
