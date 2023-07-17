@@ -18,4 +18,11 @@ QUERY 3
 SELECT * FROM `students` where TIMESTAMPDIFF(year,`date_of_birth` ,CURDATE())>30;
 ```
 -----------------------------------------------------------------------------
+QUERY 4
+
+```
+SELECT * FROM `courses` where `period` LIKE 'I semestre' and `year` like '1';
+```
+-----------------------------------------------------------------------------
+
 
