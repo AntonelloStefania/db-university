@@ -1,0 +1,7 @@
+QUERY 1
+
+```
+SELECT * FROM `students` where `date_of_birth` like '1990%';
+
+```
+
