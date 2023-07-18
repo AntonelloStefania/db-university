@@ -1,4 +1,8 @@
-QUERY 1 
+----------------------------------------------------------------------------------------------------------------------------------------------------
+PARTE GROUP BY
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 1: Contare quanti iscritti ci sono stati ogni anno
 
 SELECT COUNT(*) AS `n_students`, YEAR(`enrolment_date`) 
 FROM `students`
@@ -6,7 +10,7 @@ GROUP BY YEAR(`enrolment_date`)
 ORDER BY `n_students` DESC;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 2
+QUERY 2: Contare gli insegnanti che hanno l'ufficio nello stesso edificio
 
 SELECT count(*) as `n_teachers`, `office_address` 
 FROM `teachers` 
@@ -14,7 +18,7 @@ GROUP BY `office_address`
 ORDER BY `n_teachers` DESC;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 3
+QUERY 3: Calcolare la media dei voti di ogni appello d'esame
 
 SELECT `exams`.`id` as `id_esame`, AVG(`exam_student`.`vote`) as `voto_medio` 
 FROM `exams` 
@@ -23,7 +27,7 @@ GROUP BY `exams`.`id`
 ORDER BY `voto_medio` DESC;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 4
+QUERY 4: Contare quanti corsi di laurea ci sono per ogni dipartimento
 
 SELECT `departments`.`name` as `nome_dipartimento`, COUNT(`degrees`.`id`) as `numero_esami` 
 FROM `departments` 
@@ -31,7 +35,14 @@ JOIN `degrees` ON `departments`.`id` = `degrees`.`department_id`
 GROUP BY `departments`.`id`;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 5
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+PARTE JOIN
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 5: Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
 
 SELECT  `degrees`.`name` as `corso_di_laurea`, COUNT(`students`.`id`) AS `numero_studenti`
 FROM `degrees`
@@ -39,7 +50,7 @@ JOIN `students` ON `degrees`.`id` = `students`.`degree_id`
 WHERE `degrees`.`name` LIKE 'Corso di Laurea in Economia';
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 6
+QUERY 6: Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
 
 SELECT `departments`.`name` AS `nome_dipartimento`, `degrees`.`name` AS `nome_corso_laurea`, `degrees`.`level` AS `livello_corso` 
 FROM `departments` 
@@ -48,7 +59,7 @@ WHERE `degrees`.`level` LIKE 'magistrale'
 AND `departments`.`name` LIKE 'Dipartimento di Neuroscienze' 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 7
+QUERY 7: Selezionare tutti i corsi in cui insegna Fulvio Amato(id=44)
 
 SELECT `courses`.`name` as `nome_corso`, `teachers`.`name` as `nome_docente`, `teachers`.`surname`as `cognome_docente`
 FROM `courses`
@@ -57,7 +68,7 @@ JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`
 where `teacher_id` = 44;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 8
+QUERY 8: Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
 
 SELECT `students`.`name` as `nome_studente`, `students`.`surname` as `cognome_studente`, `degrees`.`name` as `corso_laurea`, `departments`.`name` as `nome_dipartimento`
 FROM `students`
@@ -66,7 +77,7 @@ JOIN `departments` ON `degrees`.`department_id`=`departments`.`id`
 order by `students`.`name`,`students`.`surname`;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 9
+QUERY 9: Selezionare tutti i corsi di laurea con i relativi corsi ed insegnanti
 
 SELECT `departments`.`name` as `nome_dipartimento`, `courses`.`name` as `nome_corso`, `teachers`.`name` as `nome_docente`, `teachers`.`surname` as `cognome_docente`  
 FROM `degrees`
@@ -76,7 +87,7 @@ JOIN `teachers` on `course_teacher`.`teacher_id`=`teachers`.`id`
 JOIN `departments` on `degrees`.`department_id`=`departments`.`id`;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 10
+QUERY 10: Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
 
 SELECT DISTINCT `departments`.`name` as `nome_dipartimento`, `teachers`.`name` as `nome_docente`, `teachers`.`surname` as `cognome_docente`
 FROM `departments`
@@ -85,3 +96,13 @@ JOIN `courses` ON `degrees`.`id` = `courses`.`degree_id`
 JOIN `course_teacher` ON `courses`.`id`=`course_teacher`.`course_id`
 JOIN `teachers` ON `course_teacher`.`teacher_id`=`teachers`.`id`
 WHERE `departments`.`name` LIKE 'Dipartimento di Matematica';
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 11: BONUS, Selezionare per ogni studente il numero di tentativi sostenuti per ogni esame, stampando anche il voto massimo. Successivamente filtrare i tentativi con voto minimo 18
+
+SELECT `students`.`name` as `nome_alunno`, `students`.`surname` as `cognome_alunno`, COUNT(`exams`.`id`) as `esami_sostenuti`,  MAX(`exam_student`.`vote`) as `voto_massimo`, SUM(CASE WHEN `exam_student`.`vote` >= 18 THEN 1 ELSE 0 END) as `valutazioni_sufficienti`  
+FROM `students`
+JOIN `exam_student` ON `students`.`id` = `exam_student`.`student_id`
+JOIN `exams` ON `exam_student`.`exam_id` = `exams`.`id`
+GROUP BY  `students`.`name`;
+----------------------------------------------------------------------------------------------------------------------------------------------------
