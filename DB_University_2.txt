@@ -37,3 +37,14 @@ SELECT  `degrees`.`name` as `corso_di_laurea`, COUNT(`students`.`id`) AS `numero
 FROM `degrees`
 JOIN `students` ON `degrees`.`id` = `students`.`degree_id`
 WHERE `degrees`.`name` LIKE 'Corso di Laurea in Economia';
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 6
+
+SELECT `departments`.`name` AS `nome_dipartimento`, `degrees`.`name` AS `nome_corso_laurea`, `degrees`.`level` AS `livello_corso` 
+FROM `departments` 
+JOIN `degrees` ON `departments`.`id` = `degrees`.`department_id` 
+WHERE `degrees`.`level` LIKE 'magistrale' 
+AND `departments`.`name` LIKE 'Dipartimento di Neuroscienze' 
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
