@@ -76,3 +76,12 @@ JOIN `teachers` on `course_teacher`.`teacher_id`=`teachers`.`id`
 JOIN `departments` on `degrees`.`department_id`=`departments`.`id`;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+QUERY 10
+
+SELECT DISTINCT `departments`.`name` as `nome_dipartimento`, `teachers`.`name` as `nome_docente`, `teachers`.`surname` as `cognome_docente`
+FROM `departments`
+JOIN `degrees` ON `departments`.`id` = `degrees`.`department_id`
+JOIN `courses` ON `degrees`.`id` = `courses`.`degree_id`
+JOIN `course_teacher` ON `courses`.`id`=`course_teacher`.`course_id`
+JOIN `teachers` ON `course_teacher`.`teacher_id`=`teachers`.`id`
+WHERE `departments`.`name` LIKE 'Dipartimento di Matematica';
