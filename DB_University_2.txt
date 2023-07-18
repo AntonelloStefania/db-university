@@ -2,29 +2,30 @@ QUERY 1
 
 SELECT COUNT(*) AS `n_students`, YEAR(`enrolment_date`) 
 FROM `students`
-group by YEAR(`enrolment_date`)
-order by `n_students` DESC;
+GROUP BY YEAR(`enrolment_date`)
+ORDER BY `n_students` DESC;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 QUERY 2
 
 SELECT count(*) as `n_teachers`, `office_address` 
 FROM `teachers` 
-group by `office_address` 
-order by `n_teachers` DESC;
+GROUP BY `office_address` 
+ORDER BY `n_teachers` DESC;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 QUERY 3
 
-SELECT count(*) as `n_exams`, `exams`.`id`, AVG(`exam_student`.`vote`) as `avg_vote` 
-FROM `exams` join `exam_student` on `exams`.`id` = `exam_student`.`exam_id` 
-group by `exams`.`id` order by `avg_vote` DESC;
+SELECT `exams`.`id` as `id_esame`, AVG(`exam_student`.`vote`) as `voto_medio` 
+FROM `exams` 
+JOIN `exam_student` ON `exams`.`id` = `exam_student`.`exam_id` 
+GROUP BY `exams`.`id`  
+ORDER BY `voto_medio` DESC;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 QUERY 4
 
-SELECT `departments`.`name` as `nome_dipartimento`, `degrees`.`id` as `numero_esami` 
+SELECT `departments`.`name` as `nome_dipartimento`, COUNT(`degrees`.`id`) as `numero_esami` 
 FROM `departments` 
-join `degrees` on `departments`.`id` = `degrees`.`department_id` 
-GROUP by `departments`.`id`;
-
+JOIN `degrees` ON `departments`.`id` = `degrees`.`department_id` 
+GROUP BY `departments`.`id`;
