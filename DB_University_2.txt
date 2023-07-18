@@ -20,3 +20,11 @@ SELECT count(*) as `n_exams`, `exams`.`id`, AVG(`exam_student`.`vote`) as `avg_v
 FROM `exams` join `exam_student` on `exams`.`id` = `exam_student`.`exam_id` 
 group by `exams`.`id` order by `avg_vote` DESC;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 4
+
+SELECT `departments`.`name` as `nome_dipartimento`, `degrees`.`id` as `numero_esami` 
+FROM `departments` 
+join `degrees` on `departments`.`id` = `degrees`.`department_id` 
+GROUP by `departments`.`id`;
+
