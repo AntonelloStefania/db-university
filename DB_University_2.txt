@@ -57,3 +57,12 @@ JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`
 where `teacher_id` = 44;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+QUERY 8
+
+SELECT `students`.`name` as `nome_studente`, `students`.`surname` as `cognome_studente`, `degrees`.`name` as `corso_laurea`, `departments`.`name` as `nome_dipartimento`
+FROM `students`
+JOIN `degrees` ON `students`.`degree_id`= `degrees`.`id`
+JOIN `departments` ON `degrees`.`department_id`=`departments`.`id`
+order by `students`.`name`,`students`.`surname`;
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
