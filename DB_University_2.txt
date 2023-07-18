@@ -1,0 +1,5 @@
+QUERY 1 
+
+SELECT COUNT(*) AS `n_students`, YEAR(`enrolment_date`) FROM `students` group by YEAR(`enrolment_date`) order by `n_students` DESC;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
