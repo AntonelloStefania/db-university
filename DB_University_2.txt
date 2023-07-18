@@ -29,7 +29,7 @@ ORDER BY `voto_medio` DESC;
 
 QUERY 4: Contare quanti corsi di laurea ci sono per ogni dipartimento
 
-SELECT `departments`.`name` as `nome_dipartimento`, COUNT(`degrees`.`id`) as `numero_esami` 
+SELECT `departments`.`name` as `nome_dipartimento`, COUNT(`degrees`.`id`) as `numero_corsi_laurea` 
 FROM `departments` 
 JOIN `degrees` ON `departments`.`id` = `degrees`.`department_id` 
 GROUP BY `departments`.`id`;
