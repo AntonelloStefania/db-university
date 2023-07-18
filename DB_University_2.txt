@@ -48,3 +48,12 @@ WHERE `degrees`.`level` LIKE 'magistrale'
 AND `departments`.`name` LIKE 'Dipartimento di Neuroscienze' 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+QUERY 7
+
+SELECT `courses`.`name` as `nome_corso`, `teachers`.`name` as `nome_docente`, `teachers`.`surname`as `cognome_docente`
+FROM `courses`
+JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id`
+JOIN `teachers` ON `course_teacher`.`teacher_id` = `teachers`.`id`
+where `teacher_id` = 44;
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
