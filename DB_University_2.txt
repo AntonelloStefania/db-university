@@ -104,5 +104,5 @@ SELECT `students`.`name` as `nome_alunno`, `students`.`surname` as `cognome_alun
 FROM `students`
 JOIN `exam_student` ON `students`.`id` = `exam_student`.`student_id`
 JOIN `exams` ON `exam_student`.`exam_id` = `exams`.`id`
-GROUP BY  `students`.`name`;
+GROUP BY  `students`.`id`;
 ----------------------------------------------------------------------------------------------------------------------------------------------------
